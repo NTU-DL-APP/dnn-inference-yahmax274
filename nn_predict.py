@@ -3,18 +3,29 @@ import json
 
 # === Activation functions ===
 def relu(x):
+    """
     # TODO: Implement the Rectified Linear Unit
-    # return x
+    return x
+    """
     #### add by yao ####
     return np.maximum(0, x)
     ####################
 
 def softmax(x):
+    """
     # TODO: Implement the SoftMax function
-    # return x
+    return x
+    """
     #### add by yao ####
-    exp_x = np.exp(x - np.max(x, axis=1, keepdims=True))
-    return exp_x / np.sum(exp_x, axis=1, keepdims=True)
+    x = np.asarray(x)
+    if x.ndim == 1:
+        exp_x = np.exp(x - np.max(x))
+        return exp_x / np.sum(exp_x)
+    elif x.ndim == 2:
+        exp_x = np.exp(x - np.max(x, axis=1, keepdims=True))
+        return exp_x / np.sum(exp_x, axis=1, keepdims=True)
+    else:
+        raise ValueError('Input shape not supported for softmax.')
     ####################
 
 # === Flatten ===
